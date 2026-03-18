@@ -1,52 +1,197 @@
+'use client';
 import Navbar from '@/components/Navbar';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const chapters = [
   {
     year: '1823',
     title: 'How It Started',
-    body: 'Antonio Murcatto, a Spanish immigrant, brewed his first Shiraz red wine in Bonfields, New South Wales to celebrate his marriage to Shiobhan Wijnegem. The wine\'s success prompted the couple to found a vineyard — naming it San Murcatto.',
+    location: 'Bonfields, New South Wales, Australia',
+    body: 'Antonio Murcatto — a Spanish immigrant — brewed his first Shiraz red wine to celebrate his marriage to Shiobhan Wijnegem. The wedding drew local neighbours and the festivities were fuelled by the excellent wine. The newlyweds decided to grow a large vineyard, naming their wine San Murcatto.',
+    stat: null,
+    img: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&q=80',
+    imgAlt: 'Historic vineyard rows at sunset',
+    side: 'right',
   },
   {
     year: '1880',
     title: 'Learning the Trade',
-    body: 'Passed down through generations, winemaking became a family art and duty. By 1880, a second wine — the Sauvignon Blanc — was officially licensed under the San Murcatto brand.',
+    location: 'Bonfields, New South Wales, Australia',
+    body: 'In the spirit of a true family firm, Antonio and Shiobhan passed their craft to the next generations. Winemaking was not only a trade but a dutiful art and family responsibility. By 1880, a second wine — the Sauvignon Blanc — was officially produced and licensed under the San Murcatto brand.',
+    stat: null,
+    img: 'https://images.unsplash.com/photo-1474722883778-792e7990302f?w=800&q=80',
+    imgAlt: 'Oak wine barrels in a cellar',
+    side: 'left',
   },
   {
-    year: '1965–1992',
+    year: '1965 – 1992',
     title: 'Moving Market to Europe',
-    body: 'Elvira Murcatto made a bold move: entering the Dutch wine market, then largely unknown to Australian wines. The first-mover advantage drove explosive growth. By 1992, HQ moved to Utrecht and the family sold equity to PE fund Burgundy Partners.',
+    location: 'Utrecht, the Netherlands',
+    body: 'After WWII, competition in New South Wales intensified and domestic demand fell. Elvira Murcatto made a bold move: targeting the Dutch market, then entirely unfamiliar with Australian wines. The first-mover advantage drove explosive growth in production, sales, and headcount. By 1992, HQ moved from Bonfields to Utrecht — drawn by the growing European market and a favourable Dutch tax system. That year, the family also sold equity to PE fund Burgundy Partners.',
+    stat: { value: '1992', label: 'HQ relocated to Utrecht' },
+    img: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80',
+    imgAlt: 'Wine bottles lined up in a warehouse',
+    side: 'right',
   },
   {
-    year: '2010–2015',
+    year: '2010 – 2015',
     title: 'Conquering the Alpes',
-    body: 'Junior marketing director Ellen Roy proposed targeting wine consumers in the Alpine valleys — skiers and mountaineers in Austria, Bayern, and Northern Italy. The bet paid off massively. Ellen became CEO.',
+    location: 'Garmisch-Partenkirchen, Germany',
+    body: 'Junior marketing director Ellen Roy proposed a second bold expansion: targeting wine consumers in the Alpine mountain valleys — skiers and mountaineers in Austria, Bayern, and Northern Italy. Initially mocked by competitors and met with internal backlash, the strategy proved remarkably successful. A new depot opened in Garmisch-Partenkirchen. Shareholder value rose sharply. Ellen Roy became CEO.',
+    stat: { value: '2010 – 2015', label: 'Alpine expansion period' },
+    img: 'https://images.unsplash.com/photo-1548777123-e216912df7d8?w=800&q=80',
+    imgAlt: 'Snow-covered Alpine mountain resort',
+    side: 'left',
   },
   {
-    year: '2015–Today',
+    year: '2015 – 2022',
     title: 'Trouble with Profit',
-    body: 'Increased competition from copycat Australian exporters and shifting European consumer trends eroded Murcatto\'s edge. Profitability fell to 1.9% ROCE. Internal creativity stagnated despite a talented workforce. A crisis meeting was called.',
+    location: 'Utrecht HQ',
+    body: 'From 2015 onwards, profits declined sharply. Competitors began mimicking the Murcatto model — exporting their own Shiraz and Sauvignon Blanc to Europe — eroding the brand\'s exclusivity. New consumer trends disrupted established purchasing patterns. An employee happiness survey revealed collapse in autonomy (35→25%), camaraderie (58→38%), and proactiveness (49→31%). Profitability fell to 1.9% ROCE. The Amsterdam Herald named Murcatto one of "10 food & beverage firms that lost its innovative touch". A crisis board meeting was called.',
+    stat: { value: '1.9%', label: 'ROCE at crisis point, 2022' },
+    img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80',
+    imgAlt: 'Empty wine glasses on a table',
+    side: 'right',
   },
 ];
 
 export default function StoryPage() {
   return (
-    <div className="min-h-screen bg-cream">
+    <div className="min-h-screen" style={{ background: '#f8f5f0' }}>
       <Navbar />
-      <main className="max-w-4xl mx-auto px-6 py-12">
-        <h1 className="text-4xl font-serif text-burgundy mb-2">Our Story</h1>
-        <p className="text-gray-600 font-sans mb-12">
-          Founded in 1823 in Bonfields, Australia. Headquartered in Utrecht since 1992. Bold, audacious, market-savvy — and facing its greatest test.
-        </p>
-        <div className="relative border-l-2 border-burgundy pl-8 space-y-10">
-          {chapters.map((chapter) => (
-            <div key={chapter.year} className="relative">
-              <span className="absolute -left-[2.65rem] top-1 w-5 h-5 rounded-full bg-gold border-2 border-burgundy" />
-              <span className="text-xs font-sans text-gold font-bold uppercase tracking-widest">{chapter.year}</span>
-              <h2 className="text-xl font-serif text-burgundy mt-1 mb-2">{chapter.title}</h2>
-              <p className="text-gray-700 font-sans leading-relaxed">{chapter.body}</p>
-            </div>
+
+      <main className="max-w-6xl mx-auto px-6 py-14">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-20"
+        >
+          <p className="text-xs uppercase tracking-[0.3em] font-sans mb-3" style={{ color: '#d4af37' }}>
+            Founded 1823 · Bonfields, Australia · HQ Utrecht, Netherlands
+          </p>
+          <h1
+            className="text-6xl font-serif mb-5 leading-tight"
+            style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+          >
+            Our Story
+          </h1>
+          <p className="text-base font-sans max-w-xl leading-relaxed" style={{ color: '#888' }}>
+            Two centuries of family craft, audacious market moves, and the challenge of keeping innovation alive.
+          </p>
+        </motion.div>
+
+        {/* Chapters */}
+        <div className="flex flex-col gap-24">
+          {chapters.map((chapter, i) => (
+            <motion.div
+              key={chapter.year}
+              initial={{ opacity: 0, y: 36 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.55, delay: 0.05 }}
+              className={`grid grid-cols-2 gap-12 items-center ${
+                chapter.side === 'left' ? '' : 'direction-rtl'
+              }`}
+              style={{ direction: chapter.side === 'left' ? 'ltr' : 'rtl' }}
+            >
+              {/* Image */}
+              <div
+                className="relative rounded-2xl overflow-hidden"
+                style={{
+                  direction: 'ltr',
+                  height: '320px',
+                  boxShadow: '0 12px 48px rgba(75,30,47,0.14)',
+                }}
+              >
+                <Image
+                  src={chapter.img}
+                  alt={chapter.imgAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Year overlay */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 px-5 py-4"
+                  style={{ background: 'linear-gradient(to top, rgba(75,30,47,0.85), transparent)' }}
+                >
+                  <span className="text-white font-serif text-2xl font-bold" style={{ fontFamily: 'Georgia, serif' }}>
+                    {chapter.year}
+                  </span>
+                </div>
+              </div>
+
+              {/* Text */}
+              <div style={{ direction: 'ltr' }}>
+                <p
+                  className="text-xs font-sans uppercase tracking-widest mb-2"
+                  style={{ color: '#d4af37' }}
+                >
+                  {chapter.location}
+                </p>
+                <h2
+                  className="text-3xl font-serif font-bold mb-4 leading-snug"
+                  style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+                >
+                  {chapter.title}
+                </h2>
+                <p className="text-sm font-sans leading-relaxed mb-6" style={{ color: '#666' }}>
+                  {chapter.body}
+                </p>
+
+                {/* Stat callout */}
+                {chapter.stat && (
+                  <div
+                    className="inline-flex flex-col px-5 py-3 rounded-xl"
+                    style={{ background: '#4b1e2f0d', borderLeft: '3px solid #4b1e2f' }}
+                  >
+                    <span
+                      className="text-2xl font-serif font-bold"
+                      style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+                    >
+                      {chapter.stat.value}
+                    </span>
+                    <span className="text-[11px] font-sans uppercase tracking-wider" style={{ color: '#999' }}>
+                      {chapter.stat.label}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </motion.div>
           ))}
         </div>
+
+        {/* Key figures bar */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-28 pt-10 grid grid-cols-3 gap-8"
+          style={{ borderTop: '1px solid #e8e0d8' }}
+        >
+          {[
+            { value: '€14M', label: 'Net operating profit' },
+            { value: '19M L', label: 'Volume sold annually' },
+            { value: '3', label: 'Depot locations (AUS, NL, DE)' },
+          ].map((s) => (
+            <div key={s.label}>
+              <div
+                className="text-4xl font-serif font-bold"
+                style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+              >
+                {s.value}
+              </div>
+              <div className="text-xs font-sans uppercase tracking-wider mt-1" style={{ color: '#aaa' }}>
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </main>
     </div>
   );
