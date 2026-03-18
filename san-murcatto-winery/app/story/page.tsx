@@ -61,31 +61,31 @@ export default function StoryPage() {
     <div className="min-h-screen" style={{ background: '#f8f5f0' }}>
       <Navbar />
 
-      <main className="max-w-6xl mx-auto px-6 py-14">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
 
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-20"
+          className="mb-12 sm:mb-20"
         >
           <p className="text-xs uppercase tracking-[0.3em] font-sans mb-3" style={{ color: '#d4af37' }}>
             Founded 1823 · Bonfields, Australia · HQ Utrecht, Netherlands
           </p>
           <h1
-            className="text-6xl font-serif mb-5 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-serif mb-4 sm:mb-5 leading-tight"
             style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
           >
             Our Story
           </h1>
-          <p className="text-base font-sans max-w-xl leading-relaxed" style={{ color: '#888' }}>
+          <p className="text-sm sm:text-base font-sans max-w-xl leading-relaxed" style={{ color: '#888' }}>
             Two centuries of family craft, audacious market moves, and the challenge of keeping innovation alive.
           </p>
         </motion.div>
 
         {/* Chapters */}
-        <div className="flex flex-col gap-24">
+        <div className="flex flex-col gap-14 sm:gap-20 md:gap-24">
           {chapters.map((chapter, i) => (
             <motion.div
               key={chapter.year}
@@ -93,85 +93,101 @@ export default function StoryPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.55, delay: 0.05 }}
-              className={`grid grid-cols-2 gap-12 items-center ${
-                chapter.side === 'left' ? '' : 'direction-rtl'
-              }`}
-              style={{ direction: chapter.side === 'left' ? 'ltr' : 'rtl' }}
             >
-              {/* Image */}
+              {/*
+               * Mobile: always image-on-top, text below.
+               * md+: alternating left/right via direction:rtl trick — identical to original.
+               */}
               <div
-                className="relative rounded-2xl overflow-hidden"
-                style={{
-                  direction: 'ltr',
-                  height: '320px',
-                  boxShadow: '0 12px 48px rgba(75,30,47,0.14)',
-                }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-12 items-center"
+                style={{ direction: chapter.side === 'left' ? 'ltr' : 'rtl' }}
               >
-                <Image
-                  src={chapter.img}
-                  alt={chapter.imgAlt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                {/* Year overlay */}
+                {/* Image */}
                 <div
-                  className="absolute bottom-0 left-0 right-0 px-5 py-4"
-                  style={{ background: 'linear-gradient(to top, rgba(75,30,47,0.85), transparent)' }}
+                  className="relative rounded-2xl overflow-hidden"
+                  style={{
+                    direction: 'ltr',
+                    height: '220px',
+                    boxShadow: '0 12px 48px rgba(75,30,47,0.14)',
+                  }}
                 >
-                  <span className="text-white font-serif text-2xl font-bold" style={{ fontFamily: 'Georgia, serif' }}>
-                    {chapter.year}
-                  </span>
-                </div>
-              </div>
-
-              {/* Text */}
-              <div style={{ direction: 'ltr' }}>
-                <p
-                  className="text-xs font-sans uppercase tracking-widest mb-2"
-                  style={{ color: '#d4af37' }}
-                >
-                  {chapter.location}
-                </p>
-                <h2
-                  className="text-3xl font-serif font-bold mb-4 leading-snug"
-                  style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
-                >
-                  {chapter.title}
-                </h2>
-                <p className="text-sm font-sans leading-relaxed mb-6" style={{ color: '#666' }}>
-                  {chapter.body}
-                </p>
-
-                {/* Stat callout */}
-                {chapter.stat && (
+                  {/* Taller on md+ */}
+                  <style>{`
+                    @media (min-width: 768px) {
+                      .story-img-${i} { height: 320px !important; }
+                    }
+                  `}</style>
+                  <div className={`story-img-${i} relative w-full`} style={{ height: '100%' }}>
+                    <Image
+                      src={chapter.img}
+                      alt={chapter.imgAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  {/* Year overlay */}
                   <div
-                    className="inline-flex flex-col px-5 py-3 rounded-xl"
-                    style={{ background: '#4b1e2f0d', borderLeft: '3px solid #4b1e2f' }}
+                    className="absolute bottom-0 left-0 right-0 px-4 py-3 sm:px-5 sm:py-4"
+                    style={{ background: 'linear-gradient(to top, rgba(75,30,47,0.85), transparent)' }}
                   >
                     <span
-                      className="text-2xl font-serif font-bold"
-                      style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+                      className="text-white font-serif text-xl sm:text-2xl font-bold"
+                      style={{ fontFamily: 'Georgia, serif' }}
                     >
-                      {chapter.stat.value}
-                    </span>
-                    <span className="text-[11px] font-sans uppercase tracking-wider" style={{ color: '#999' }}>
-                      {chapter.stat.label}
+                      {chapter.year}
                     </span>
                   </div>
-                )}
+                </div>
+
+                {/* Text */}
+                <div style={{ direction: 'ltr' }}>
+                  <p
+                    className="text-xs font-sans uppercase tracking-widest mb-2"
+                    style={{ color: '#d4af37' }}
+                  >
+                    {chapter.location}
+                  </p>
+                  <h2
+                    className="text-2xl sm:text-3xl font-serif font-bold mb-3 sm:mb-4 leading-snug"
+                    style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+                  >
+                    {chapter.title}
+                  </h2>
+                  <p className="text-sm font-sans leading-relaxed mb-5 sm:mb-6" style={{ color: '#666' }}>
+                    {chapter.body}
+                  </p>
+
+                  {/* Stat callout */}
+                  {chapter.stat && (
+                    <div
+                      className="inline-flex flex-col px-4 sm:px-5 py-3 rounded-xl"
+                      style={{ background: '#4b1e2f0d', borderLeft: '3px solid #4b1e2f' }}
+                    >
+                      <span
+                        className="text-xl sm:text-2xl font-serif font-bold"
+                        style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+                      >
+                        {chapter.stat.value}
+                      </span>
+                      <span className="text-[11px] font-sans uppercase tracking-wider" style={{ color: '#999' }}>
+                        {chapter.stat.label}
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Key figures bar */}
+        {/* Key figures bar — 1 col on mobile, 3 on sm+ */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-28 pt-10 grid grid-cols-3 gap-8"
+          className="mt-16 sm:mt-28 pt-8 sm:pt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8"
           style={{ borderTop: '1px solid #e8e0d8' }}
         >
           {[
@@ -181,7 +197,7 @@ export default function StoryPage() {
           ].map((s) => (
             <div key={s.label}>
               <div
-                className="text-4xl font-serif font-bold"
+                className="text-3xl sm:text-4xl font-serif font-bold"
                 style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
               >
                 {s.value}
@@ -192,6 +208,7 @@ export default function StoryPage() {
             </div>
           ))}
         </motion.div>
+
       </main>
     </div>
   );

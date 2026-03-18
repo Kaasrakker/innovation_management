@@ -88,8 +88,8 @@ export default function FuturePage() {
     <div className="min-h-screen" style={{ background: '#f8f5f0' }}>
       <Navbar />
 
-      {/* Hero — dawn image */}
-      <div className="relative h-[420px] w-full overflow-hidden">
+      {/* Hero */}
+      <div className="relative h-[300px] sm:h-[360px] md:h-[420px] w-full overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&q=80"
           alt="Golden sunrise over vineyards"
@@ -105,39 +105,39 @@ export default function FuturePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="absolute bottom-0 left-0 px-10 pb-12 max-w-3xl"
+          className="absolute bottom-0 left-0 px-5 pb-8 sm:px-8 sm:pb-10 md:px-10 md:pb-12 max-w-3xl"
         >
-          <p className="text-xs uppercase tracking-[0.3em] font-sans mb-3" style={{ color: '#d4af37' }}>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-sans mb-2 sm:mb-3" style={{ color: '#d4af37' }}>
             Looking ahead · San Murcatto · 2022 onwards
           </p>
           <h1
-            className="text-6xl font-serif font-bold text-white leading-tight mb-4"
+            className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white leading-tight mb-3 sm:mb-4"
             style={{ fontFamily: 'Georgia, serif' }}
           >
             A New Dawn
           </h1>
-          <p className="text-base font-sans leading-relaxed" style={{ color: 'rgba(255,255,255,0.8)' }}>
+          <p className="text-sm font-sans leading-relaxed" style={{ color: 'rgba(255,255,255,0.8)' }}>
             After years of decline, the crisis meeting of February 2022 became a turning point. The ideas were always there — thirty of them surfaced in days. What follows is the story of how San Murcatto reclaims its identity as a bold, market-savvy, innovative winery.
           </p>
         </motion.div>
       </div>
 
-      <main className="max-w-6xl mx-auto px-6 py-20 space-y-28">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 space-y-20 sm:space-y-28">
 
-        {/* Growth narrative */}
+        {/* Growth narrative — stacks on mobile, side-by-side on md+ */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-2 gap-16 items-center"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center"
         >
           <div>
             <p className="text-xs uppercase tracking-[0.25em] font-sans mb-3" style={{ color: '#d4af37' }}>
               The opportunity
             </p>
             <h2
-              className="text-4xl font-serif font-bold mb-6 leading-snug"
+              className="text-3xl sm:text-4xl font-serif font-bold mb-6 leading-snug"
               style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
             >
               The ideas were never the problem.
@@ -154,18 +154,19 @@ export default function FuturePage() {
           </div>
           <div
             className="relative rounded-2xl overflow-hidden"
-            style={{ height: '380px', boxShadow: '0 16px 56px rgba(75,30,47,0.15)' }}
+            style={{ height: '280px', boxShadow: '0 16px 56px rgba(75,30,47,0.15)' }}
           >
             <Image
               src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80"
               alt="Sunlight breaking through vineyard leaves"
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </motion.section>
 
-        {/* Top ideas */}
+        {/* Top ideas — 1 col mobile, 2 col sm, 3 col lg */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -176,16 +177,16 @@ export default function FuturePage() {
             From the floor
           </p>
           <h2
-            className="text-4xl font-serif font-bold mb-2"
+            className="text-3xl sm:text-4xl font-serif font-bold mb-2"
             style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
           >
             Top Employee Ideas
           </h2>
-          <p className="text-sm font-sans mb-10 max-w-xl" style={{ color: '#999' }}>
+          <p className="text-sm font-sans mb-8 sm:mb-10 max-w-xl" style={{ color: '#999' }}>
             Six ideas selected for immediate development from the 30 submitted in the first month.
           </p>
 
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {topIdeas.map((idea, i) => (
               <motion.div
                 key={idea.id}
@@ -194,7 +195,7 @@ export default function FuturePage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
                 whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(75,30,47,0.12)' }}
-                className="rounded-2xl p-5"
+                className="rounded-2xl p-4 sm:p-5"
                 style={{
                   background: '#fff',
                   border: '1px solid #ede8e0',
@@ -226,25 +227,25 @@ export default function FuturePage() {
           </div>
         </motion.section>
 
-        {/* Ventures */}
+        {/* Ventures — stacks on mobile, side-by-side on md+ */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="grid grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
             <div>
               <p className="text-xs uppercase tracking-[0.25em] font-sans mb-3" style={{ color: '#d4af37' }}>
                 Spin-in assessment
               </p>
               <h2
-                className="text-4xl font-serif font-bold mb-4 leading-snug"
+                className="text-3xl sm:text-4xl font-serif font-bold mb-4 leading-snug"
                 style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
               >
                 Four Ventures.<br />Two Acquisitions.
               </h2>
-              <p className="text-sm font-sans leading-relaxed mb-10" style={{ color: '#666' }}>
+              <p className="text-sm font-sans leading-relaxed mb-8 sm:mb-10" style={{ color: '#666' }}>
                 Former employees started four ventures in the years prior to the crisis. The board authorises acquisition of a maximum of two. Each was evaluated for strategic fit, commercial maturity, and alignment with the Murcatto brand.
               </p>
 
@@ -256,14 +257,14 @@ export default function FuturePage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    className="rounded-xl p-5"
+                    className="rounded-xl p-4 sm:p-5"
                     style={{
                       background: '#fff',
                       border: '1px solid #ede8e0',
                       borderLeft: `3px solid ${v.color}`,
                     }}
                   >
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-start sm:items-center justify-between gap-2 mb-2">
                       <h3
                         className="font-serif font-bold text-sm"
                         style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
@@ -271,7 +272,7 @@ export default function FuturePage() {
                         {v.name}
                       </h3>
                       <span
-                        className="text-[10px] font-bold font-sans px-2 py-0.5 rounded-full shrink-0 ml-3"
+                        className="text-[10px] font-bold font-sans px-2 py-0.5 rounded-full shrink-0"
                         style={{ background: v.color + '20', color: v.color }}
                       >
                         {v.verdict}
@@ -292,25 +293,26 @@ export default function FuturePage() {
               </p>
             </div>
 
-            {/* Right: growth image + quote */}
-            <div className="flex flex-col gap-6 sticky top-10">
+            {/* Right col: image + quote — not sticky on mobile */}
+            <div className="flex flex-col gap-6 md:sticky md:top-10">
               <div
                 className="relative rounded-2xl overflow-hidden"
-                style={{ height: '280px', boxShadow: '0 16px 56px rgba(75,30,47,0.12)' }}
+                style={{ height: '240px', boxShadow: '0 16px 56px rgba(75,30,47,0.12)' }}
               >
                 <Image
                   src="https://images.unsplash.com/photo-1543418219-44e30b057fea?w=800&q=80"
                   alt="Wine glasses clinking at a celebration"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div
-                className="rounded-2xl p-7"
+                className="rounded-2xl p-5 sm:p-7"
                 style={{ background: '#4b1e2f', color: '#fff' }}
               >
                 <p
-                  className="text-xl font-serif leading-relaxed mb-4"
+                  className="text-lg sm:text-xl font-serif leading-relaxed mb-4"
                   style={{ fontFamily: 'Georgia, serif', color: '#f8f5f0' }}
                 >
                   &quot;Let us together create an organization that thrives at supporting and stimulating corporate entrepreneurship and innovation.&quot;
@@ -330,7 +332,7 @@ export default function FuturePage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="relative rounded-3xl overflow-hidden"
-          style={{ minHeight: '320px' }}
+          style={{ minHeight: '280px' }}
         >
           <Image
             src="https://images.unsplash.com/photo-1504279577054-acfeccf8fc52?w=1600&q=80"
@@ -342,12 +344,12 @@ export default function FuturePage() {
             className="absolute inset-0"
             style={{ background: 'linear-gradient(135deg, rgba(75,30,47,0.88) 0%, rgba(75,30,47,0.5) 100%)' }}
           />
-          <div className="relative z-10 px-14 py-16 max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.3em] font-sans mb-4" style={{ color: '#d4af37' }}>
+          <div className="relative z-10 px-6 py-10 sm:px-10 sm:py-14 md:px-14 md:py-16 max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.3em] font-sans mb-3 sm:mb-4" style={{ color: '#d4af37' }}>
               The vision
             </p>
             <h2
-              className="text-4xl font-serif font-bold text-white mb-6 leading-snug"
+              className="text-3xl sm:text-4xl font-serif font-bold text-white mb-4 sm:mb-6 leading-snug"
               style={{ fontFamily: 'Georgia, serif' }}
             >
               Market savvy. Innovative. Audacious.

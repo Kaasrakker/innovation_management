@@ -75,20 +75,20 @@ export default function PhasesPage() {
     <div className="min-h-screen" style={{ background: '#f8f5f0' }}>
       <Navbar />
 
-      <main className="max-w-6xl mx-auto px-6 py-14">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
 
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-16"
+          className="mb-10 sm:mb-16"
         >
           <p className="text-xs uppercase tracking-[0.3em] font-sans mb-3" style={{ color: '#d4af37' }}>
             ECB3IM · 100-Day Plan · €80,000 budget
           </p>
           <h1
-            className="text-5xl font-serif font-bold mb-4 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold mb-4 leading-tight"
             style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
           >
             Strategic Phases
@@ -98,8 +98,8 @@ export default function PhasesPage() {
           </p>
         </motion.div>
 
-        {/* Phase cards — alternating layout */}
-        <div className="flex flex-col gap-16">
+        {/* Phase cards */}
+        <div className="flex flex-col gap-10 sm:gap-16">
           {phases.map((phase, i) => (
             <motion.div
               key={phase.number}
@@ -107,97 +107,109 @@ export default function PhasesPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5 }}
-              className={`grid grid-cols-5 gap-10 items-start ${i % 2 === 1 ? 'direction-rtl' : ''}`}
-              style={{ direction: i % 2 === 1 ? 'rtl' : 'ltr' }}
             >
-              {/* Image — 2 cols */}
+              {/*
+               * Mobile: always image-on-top, content below (single column).
+               * md+: alternating 2/3 grid layout using direction:rtl trick.
+               */}
               <div
-                className="col-span-2 relative rounded-2xl overflow-hidden"
-                style={{
-                  direction: 'ltr',
-                  height: '340px',
-                  boxShadow: '0 12px 48px rgba(75,30,47,0.13)',
-                }}
+                className={`grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-10 items-start`}
+                style={{ direction: i % 2 === 1 ? 'rtl' : 'ltr' }}
               >
-                <Image
-                  src={phase.img}
-                  alt={phase.imgAlt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                />
-                {/* Phase number overlay */}
+                {/* Image */}
                 <div
-                  className="absolute top-4 left-4 w-12 h-12 rounded-full flex items-center justify-center"
-                  style={{ background: phase.color }}
+                  className="col-span-1 md:col-span-2 relative rounded-2xl overflow-hidden"
+                  style={{
+                    direction: 'ltr',
+                    height: '220px',
+                    boxShadow: '0 12px 48px rgba(75,30,47,0.13)',
+                  }}
                 >
-                  <span className="text-white font-serif font-bold text-lg" style={{ fontFamily: 'Georgia, serif' }}>
-                    {phase.number}
-                  </span>
+                  {/* On md+ restore the taller height */}
+                  <style>{`
+                    @media (min-width: 768px) {
+                      .phase-img-${phase.number} { height: 340px !important; }
+                    }
+                  `}</style>
+                  <div
+                    className={`phase-img-${phase.number} relative w-full h-full`}
+                    style={{ height: '100%' }}
+                  >
+                    <Image
+                      src={phase.img}
+                      alt={phase.imgAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                    />
+                  </div>
+                  {/* Phase number overlay */}
+                  <div
+                    className="absolute top-4 left-4 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center"
+                    style={{ background: phase.color }}
+                  >
+                    <span className="text-white font-serif font-bold text-base sm:text-lg" style={{ fontFamily: 'Georgia, serif' }}>
+                      {phase.number}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              {/* Content — 3 cols */}
-              <div className="col-span-3" style={{ direction: 'ltr' }}>
-                <p
-                  className="text-xs uppercase tracking-[0.25em] font-sans mb-1"
-                  style={{ color: phase.color }}
-                >
-                  {phase.period}
-                </p>
-                <h2
-                  className="text-3xl font-serif font-bold mb-3"
-                  style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
-                >
-                  Phase {phase.number} — {phase.title}
-                </h2>
-                <p
-                  className="text-sm font-sans font-semibold mb-3 leading-relaxed"
-                  style={{ color: '#555' }}
-                >
-                  {phase.summary}
-                </p>
-                <p className="text-sm font-sans leading-relaxed mb-7" style={{ color: '#888' }}>
-                  {phase.context}
-                </p>
+                {/* Content */}
+                <div className="col-span-1 md:col-span-3" style={{ direction: 'ltr' }}>
+                  <p
+                    className="text-xs uppercase tracking-[0.25em] font-sans mb-1"
+                    style={{ color: phase.color }}
+                  >
+                    {phase.period}
+                  </p>
+                  <h2
+                    className="text-2xl sm:text-3xl font-serif font-bold mb-3"
+                    style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
+                  >
+                    Phase {phase.number} — {phase.title}
+                  </h2>
+                  <p
+                    className="text-sm font-sans font-semibold mb-3 leading-relaxed"
+                    style={{ color: '#555' }}
+                  >
+                    {phase.summary}
+                  </p>
+                  <p className="text-sm font-sans leading-relaxed mb-6 sm:mb-7" style={{ color: '#888' }}>
+                    {phase.context}
+                  </p>
 
-                {/* Actions */}
-                <div className="flex flex-col gap-3">
-                  {phase.actions.map((action) => (
-                    <div
-                      key={action.label}
-                      className="flex gap-3 items-start"
-                    >
-                      <div
-                        className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
-                        style={{ background: phase.color }}
-                      />
-                      <div>
-                        <span
-                          className="text-sm font-sans font-semibold"
-                          style={{ color: '#2a1018' }}
-                        >
-                          {action.label}
-                        </span>
-                        <span className="text-sm font-sans" style={{ color: '#999' }}>
-                          {' '}— {action.detail}
-                        </span>
+                  {/* Actions */}
+                  <div className="flex flex-col gap-3">
+                    {phase.actions.map((action) => (
+                      <div key={action.label} className="flex gap-3 items-start">
+                        <div
+                          className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
+                          style={{ background: phase.color }}
+                        />
+                        <div>
+                          <span className="text-sm font-sans font-semibold" style={{ color: '#2a1018' }}>
+                            {action.label}
+                          </span>
+                          <span className="text-sm font-sans" style={{ color: '#999' }}>
+                            {' '}— {action.detail}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Budget footer */}
+        {/* Budget footer — 2 cols on mobile, 4 on md+ */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-20 pt-10 grid grid-cols-4 gap-6"
+          className="mt-14 sm:mt-20 pt-8 sm:pt-10 grid grid-cols-2 md:grid-cols-4 gap-6"
           style={{ borderTop: '1px solid #e8e0d8' }}
         >
           {[
@@ -208,7 +220,7 @@ export default function PhasesPage() {
           ].map((s) => (
             <div key={s.label}>
               <div
-                className="text-3xl font-serif font-bold"
+                className="text-2xl sm:text-3xl font-serif font-bold"
                 style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
               >
                 {s.value}
