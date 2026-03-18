@@ -95,7 +95,7 @@ export default function TimelinePage() {
       <Navbar />
 
       {/* Hero */}
-      <div className="relative h-[360px] w-full overflow-hidden">
+      <div className="relative h-[280px] sm:h-[320px] md:h-[360px] w-full overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&q=80"
           alt="Golden sunrise over a vineyard"
@@ -111,34 +111,36 @@ export default function TimelinePage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="absolute bottom-0 left-0 px-10 pb-10 max-w-3xl"
+          className="absolute bottom-0 left-0 px-5 pb-7 sm:px-8 sm:pb-9 md:px-10 md:pb-10 max-w-3xl"
         >
-          <p className="text-xs uppercase tracking-[0.3em] font-sans mb-2" style={{ color: '#d4af37' }}>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-sans mb-2" style={{ color: '#d4af37' }}>
             ECB3IM · Innovation Management · February 2022
           </p>
-          <h1 className="text-5xl font-serif font-bold text-white leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-white leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
             100-Day Management Plan
           </h1>
-          <p className="text-sm font-sans mt-3" style={{ color: 'rgba(255,255,255,0.75)' }}>
+          <p className="text-xs sm:text-sm font-sans mt-2 sm:mt-3" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Ellen Roy&apos;s action plan to restore San Murcatto&apos;s innovative power — €80,000 budget — presented to the Executive Shareholder Committee.
           </p>
         </motion.div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-6 py-14">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
 
         {/* Timeline */}
         <div className="relative mb-6">
-          {/* Spine */}
+
+          {/* Spine — only visible on md+ where the 4-col grid is active */}
           <motion.div
-            className="absolute h-px top-[5.2rem] left-0 right-0"
+            className="hidden md:block absolute h-px top-[5.2rem] left-0 right-0"
             style={{ background: 'linear-gradient(to right, #4b1e2f, #6bb187, #d4af37, #8b5e3c)' }}
             initial={{ scaleX: 0, transformOrigin: 'left' }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1.1, ease: 'easeInOut' }}
           />
 
-          <div className="grid grid-cols-4 gap-6">
+          {/* Mobile: vertical stacked list — Tablet: 2 cols — Desktop: 4 cols */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6">
             {phases.map((phase, pi) => (
               <motion.div
                 key={phase.label}
@@ -157,7 +159,7 @@ export default function TimelinePage() {
                     alt={phase.imgAlt}
                     fill
                     className="object-cover"
-                    sizes="25vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
                   />
                   <div
                     className="absolute inset-0"
@@ -171,9 +173,9 @@ export default function TimelinePage() {
                   </span>
                 </div>
 
-                {/* Dot on spine */}
+                {/* Dot on spine — only shown on md+ */}
                 <motion.div
-                  className="w-[10px] h-[10px] rounded-full mb-4 ml-0"
+                  className="hidden md:block w-[10px] h-[10px] rounded-full mb-4 ml-0"
                   style={{ background: phase.color, boxShadow: `0 0 0 3px #f8f5f0, 0 0 0 5px ${phase.color}` }}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
@@ -216,12 +218,12 @@ export default function TimelinePage() {
           </div>
         </div>
 
-        {/* Footer stats */}
+        {/* Footer stats — 2 cols on mobile, 4 on desktop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4 }}
-          className="mt-14 pt-8 grid grid-cols-4 gap-6 mb-10"
+          className="mt-10 sm:mt-14 pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 mb-10"
           style={{ borderTop: '1px solid #e8e0d8' }}
         >
           {[
@@ -231,7 +233,7 @@ export default function TimelinePage() {
             { value: '+35%', label: 'Purchase intent w/ modern label' },
           ].map((s) => (
             <div key={s.label}>
-              <div className="text-3xl font-serif font-bold" style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}>
+              <div className="text-2xl sm:text-3xl font-serif font-bold" style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}>
                 {s.value}
               </div>
               <div className="text-[11px] font-sans uppercase tracking-wider mt-1" style={{ color: '#aaa' }}>
@@ -241,20 +243,20 @@ export default function TimelinePage() {
           ))}
         </motion.div>
 
-        {/* CTA to future */}
+        {/* CTA to future — stacks on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="flex items-center justify-between rounded-2xl px-8 py-7 mb-24"
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 rounded-2xl px-6 sm:px-8 py-6 sm:py-7 mb-16 sm:mb-24"
           style={{ background: '#4b1e2f' }}
         >
           <div>
             <p className="text-xs uppercase tracking-[0.25em] font-sans mb-1" style={{ color: '#d4af37' }}>
               Beyond Day 100
             </p>
-            <h3 className="text-2xl font-serif font-bold text-white" style={{ fontFamily: 'Georgia, serif' }}>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-white" style={{ fontFamily: 'Georgia, serif' }}>
               What comes next?
             </h3>
             <p className="text-sm font-sans mt-1" style={{ color: 'rgba(255,255,255,0.6)' }}>
@@ -263,7 +265,7 @@ export default function TimelinePage() {
           </div>
           <Link
             href="/future"
-            className="shrink-0 px-7 py-3 rounded-full font-sans font-semibold text-sm transition-all hover:scale-105"
+            className="shrink-0 px-7 py-3 rounded-full font-sans font-semibold text-sm transition-all hover:scale-105 whitespace-nowrap"
             style={{ background: '#d4af37', color: '#4b1e2f' }}
           >
             View Future Plans →
@@ -281,16 +283,17 @@ export default function TimelinePage() {
             Looking ahead
           </p>
           <h2
-            className="text-4xl font-serif font-bold mb-2"
+            className="text-3xl sm:text-4xl font-serif font-bold mb-2"
             style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
           >
             Beyond the 100 Days
           </h2>
-          <p className="text-sm font-sans mb-10 max-w-xl" style={{ color: '#999' }}>
+          <p className="text-sm font-sans mb-8 sm:mb-10 max-w-xl" style={{ color: '#999' }}>
             The 100-day plan is the foundation. What follows is the full story of recovery — new products, new channels, and new markets.
           </p>
 
-          <div className="grid grid-cols-2 gap-6">
+          {/* Cards — 1 col on mobile, 2 on sm+ */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
             {futurePlans.map((plan, i) => (
               <motion.div
                 key={plan.title}
@@ -308,7 +311,7 @@ export default function TimelinePage() {
                     alt={plan.imgAlt}
                     fill
                     className="object-cover"
-                    sizes="50vw"
+                    sizes="(max-width: 640px) 100vw, 50vw"
                   />
                   <div
                     className="absolute inset-0"
@@ -322,9 +325,9 @@ export default function TimelinePage() {
                   </span>
                 </div>
 
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <h3
-                    className="font-serif font-bold text-lg mb-2"
+                    className="font-serif font-bold text-base sm:text-lg mb-2"
                     style={{ color: '#4b1e2f', fontFamily: 'Georgia, serif' }}
                   >
                     {plan.title}
@@ -338,10 +341,10 @@ export default function TimelinePage() {
           </div>
 
           {/* Final CTA */}
-          <div className="mt-10 text-center">
+          <div className="mt-8 sm:mt-10 text-center">
             <Link
               href="/future"
-              className="inline-block px-10 py-4 rounded-full font-sans font-semibold text-sm transition-all hover:scale-105"
+              className="inline-block px-8 sm:px-10 py-3 sm:py-4 rounded-full font-sans font-semibold text-sm transition-all hover:scale-105"
               style={{ background: '#4b1e2f', color: '#f8f5f0' }}
             >
               Explore the Full Future Plan →
