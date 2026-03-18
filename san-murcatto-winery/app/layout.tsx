@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Merriweather, Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const merriweather = Merriweather({
   variable: "--font-merriweather",
@@ -27,6 +29,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${merriweather.variable} ${inter.variable} antialiased`}>
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
